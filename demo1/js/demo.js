@@ -20,7 +20,7 @@ var x_boole = true; // false
 var x_null = null;       // "空"
 var x_undefined = undefined; //undefined : 为定义 和null 相似
 
-
+// 注： undefined/null/0/-0/Nan/""   会被转换为 false
 
 // ================================JavaScrip 中最重要的类型是对象。======================================
 
@@ -37,6 +37,18 @@ book["fat"];      // true
 
 book.author = "Flanagan";   // 新增属性1
 book["author2"] = "Flanagan2";   // 新增属性2
+
+// Object.create() 方法，它创建一个新的对象，其中第一个参数是这个对象的原型。第二个参数，用于对 对象属性进一步描述。
+
+var o1 = {
+    x: 1, y: 2
+};
+
+var o2 = Object.create(o1); 
+
+// Object.create(null); 创建一个没有原型的新对象，通过null创建的对象不会继承任何东西。
+
+
 
 
 // ================================JavaScript 数组===================================
@@ -108,6 +120,40 @@ function abs(x){
     }
 };
 
+// 多个分支
+if (n == 1){
+    // 执行代码块 1
+}
+else if (n == 2){
+    // 执行代码块 2
+}
+else if (n == 3 ){
+    // 执行代码块3
+}
+else{
+    // 其他条件，执行！
+}
+
+// switch
+
+switch(n){
+    case 1:                            // 如果 n === 1, 从这里执行
+        // 执行代码块 1
+        break;
+    case 2:
+        // 执行代码块 2
+        break;
+    case 3:
+        // 执行代码块 3
+        break;
+    default:                           // 所有的条件都不匹配
+        // 执行代码块 4
+        break;
+
+}
+
+
+
 // while 循环
 
 function fun_while(n){
@@ -128,6 +174,17 @@ function fun_for(n){
     }
     return product;
 }
+
+// do while  --> 至少会执行一次
+
+/*
+
+do{
+    执行代码；
+}while ();
+
+*/
+
 
 
 

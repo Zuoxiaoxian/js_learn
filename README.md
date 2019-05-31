@@ -1,6 +1,6 @@
 ## javascript 学习
 
-### demo1 
+### demo 
 
 *变量，对象，数组，函数，方法，·类·*
 
@@ -48,6 +48,19 @@ book["fat"];      // true
 
 book.author = "Flanagan";   // 新增属性1
 book["author2"] = "Flanagan2";   // 新增属性2
+
+// Object.create() 方法，它创建一个新的对象，其中第一个参数是这个对象的原型。第二个参数，用于对 对象属性进一步描述。
+
+var o1 = {
+    x: 1, y: 2
+};
+
+var o2 = Object.create(o1); 
+
+// Object.create(null); 创建一个没有原型的新对象，通过null创建的对象不会继承任何东西。
+
+
+
 
 ```
 
@@ -136,6 +149,23 @@ function abs(x){
     }
 };
 
+
+// 多个分支
+if (n == 1){
+    // 执行代码块 1
+}
+else if (n == 2){
+    // 执行代码块 2
+}
+else if (n == 3 ){
+    // 执行代码块3
+}
+else{
+    // 其他条件，执行！
+}
+
+
+
 ```
 
 **循环**
@@ -158,6 +188,25 @@ function fun_for(n){
     }
     return result;
 };
+
+*switch*
+
+switch(n){
+    case 1:                            // 如果 n === 1, 从这里执行
+        // 执行代码块 1
+        break;
+    case 2:
+        // 执行代码块 2
+        break;
+    case 3:
+        // 执行代码块 3
+        break;
+    default:                           // 所有的条件都不匹配
+        // 执行代码块 4
+        break;
+
+}
+
 ```
 
 **面向对象编程（类）**
@@ -191,3 +240,77 @@ var p = new Ponit(3, 4);
 // 调用方法 p.rr() p.r()
 ```
 
+
+
+*其他有用的*
+
+
+**条件运算符(?:)**
+
+```javascript
+
+x > 0 ? x: -x;   // x 绝对值, ? 左边是条件语句，右边为true的，: 后是false的
+
+```
+
+**delete**
+
+```javascript
+
+var o = { x: 1, y: 1 }; // 定义一个对象
+
+delete o.x;             // 删除对象o的一个属性
+
+"x" in o;               // 判断x 是否在对象o中
+
+```
+
+**typeof(x)           得到 x 的类型**
+
+```javascript
+
+var a = 1;
+typeof(a);             // => 'number'
+
+var x = '1';           // => 'string'
+
+
+```
+
+**抛出异常，使用throw new Error("")**
+
+```javascript
+
+
+function fac(x){
+    // 如果输入参数是非法的，则抛出一个异常
+    if (x < 0 ){
+        throw new Error("x 不能为负数");
+    }
+    else{
+        alert(x)
+    }
+}
+
+
+```
+
+**异常处理 try/catch/finally**
+
+
+```javascript
+try{
+    // 通常来讲，这里的代码会从头执行到尾，而不会产生任何问题，
+    // 但有时会抛出异常， 要么是由throw语句直接抛出异常，要么是通过调用一个方法简介抛出异常
+}
+catch(e){
+    // 当且仅当try语句块抛出了异常，才会执行这里的代码。
+    // 这里通过局部变量e来获取对Error对象或者抛出的其他值的引用
+    //  当捕获一个异常时，把这个异常相关值（如Error对象）赋值给这个参数
+    // 这里的代码块可以基于某种原因处理这个异常，也可忽略这个异常，还可以通过throw语句重新抛出异常。
+}
+finally{
+    // 不管try语句是否抛出了异常，这里的逻辑总是会执行，
+}
+
+```
