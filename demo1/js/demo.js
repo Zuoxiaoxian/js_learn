@@ -3,9 +3,23 @@ var x_int = 0;
 var x_f = 0.01;
 var x_str = "hello, world";
 var x_str2 = 'hello, world';
+
+x_str.charAt(1);   // e
+x_str.slice(0,5);  // hello  包左不包右 
+x_str.slice(-5);   // world
+
+x_str.indexOf('e'); // e 首次出现的位置
+x_str.indexOf('e', 3); // e 在 3及之后首次出现的位置
+x_str.lastIndexOf('e'); // e 最后一次出现的位置
+
+x_str.split(', ');      // ["hello", "world"]
+
+x_str.replace("h", "H");  //
+
 var x_boole = true; // false
 var x_null = null;       // "空"
-var x_undefined = undefined; //undefined 和null 相似
+var x_undefined = undefined; //undefined : 为定义 和null 相似
+
 
 
 // ================================JavaScrip 中最重要的类型是对象。======================================
