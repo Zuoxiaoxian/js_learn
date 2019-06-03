@@ -77,10 +77,126 @@ var empty = [];                    // [] 空数组， 长度为 0
 
 primes.push(1,2,3);                // push()向数组中添加元素
 
+primes.pop();                      // pop() 弹出数组最后一个元素。
+
+// unshift() 和 shift();   unshift() 在数组头部添加一个或多个元素,返回数组长度。 shift()删除数组的第一个元素并将其返回。
+
 primes.reverse();                 // reverse() 翻转数组
 
+// 可像删除对象属性一样，使用delete来删除元组元素
+
+delete primes[0]; // 删除id 为 0 的元素！
+
+// join()   Array.join()  将数字中的所有元素都转换为字符串连接在一起，返回最后生成的字符串。
+
+// 可以指定一个可选的字符串在生成的字符串中分割数字的各个元素。如果不指定分割符，默认使用逗号。
+
+var a = [1,2,3];
+a.join(); // => "1,2,3"
+
+a.join(" "); // => "1 2 3"
+
+a.join(""); // => "123"
 
 
+// reverse()  Array.reverse(): 将数组中的元素颠倒顺序，返回逆序的数组。
+
+var a = [1,23];
+
+a.reverse(); // =>[3,2,1]
+
+// sort() Array.sort(): 将数组中的元素排序并返回排序后的数组。默认按字母表顺序排序。
+
+// 如果按照其他方式而非字母表顺序，必须给sort()方法传递一个 比较函数。假设第一个参数应该在前，比较函数应返回一个小于 0 的值， 反之 大于 0
+
+var a = [33, 4, 1111, 222];
+
+a.sort(function(a, b){         // 4, 33, 222, 1111
+    return a - b;             // 返回值，小于0 -> 从小到大顺序， 大于0 -> 从大到小！
+});
+
+
+// slic() Array.slice(): 返回指定数组的一个片段或子数组。
+
+var a = [1,2,3,4,5];
+
+a.slice(0,3);        // => [1, 2, 3]
+
+a.slice(3);          // => [4, 5]
+
+a.slice(1, -1);      // => [2,3,4]
+
+a.slice(-3, -2);     // => [3]
+
+// splice() Array.splice(): 从数字中删除、插入元素，修改了原数组！
+
+var a = [1,2,3,4,5,6,7,8];
+a.splice(4);              // => [5,6,7,8]; a: [1,2,3,4]
+
+a.splice(1,2);            // => [2,3]; a:[1,4] 在id 为1处删除2个元素
+
+a.splice(1,1);            // => [4]; a: [1] 在id 为1处删除1个元素
+
+// splice() 的前两个参数指定了需要删除的数组元素。其后的任意个数的参数指定了需要插入到数组中的元素，从第一个参数指定的位置开始插入。
+
+var a =[1,2,3,45];
+
+a.splice(2,0,'a','b');   // => []; a: [1,2,'a','b',3,4,5]
+
+a.splice(2,2,[1,2],3);   // => ['a',b]; a: [1,2,[1,2],3,3,4,5]
+
+// toString() 和 toLocaleString()
+
+// 数组和其他JavaScript对象一样有用toScript()方法。
+
+var a = [1,2,3];
+var a_ = a.toString();   // => '1,2,3'
+
+// toLocaleString() 是 toString() 方法的本地化版本。
+
+
+// Array.forEach(): 从头至尾遍历数组，为每个元素调用指定的函数。传递的第一个参数是函数，函数里面使用三个参数：数组元素，元素本身索引，数组本身。
+
+var data = [1,2,3,4,5]; 
+
+var sum = 0;
+
+data.forEach(function(value, id, a){
+    // value: 数组元素
+    // id: 元素的索引id
+    // a:  数组本身
+    sum += value;
+});
+
+// 终止： 必须是在try块中， 抛出 foreach.break 异常
+
+
+// Array.map()： 将调用数组中每一个元素传递给指定的函数，并返回一个数组。
+
+var a = [1,2,3];
+
+var b = a.map(function(x){ return x * x;}); // b: [1,4,9]
+
+// Array.filter(): 和map() 类似，返回值为true或能转换为true，那么该元素就添加到返回数组中。
+
+var a = [5,4,3,2,1];
+
+var a_ = a.filter(function(x){ return x < 3;});  // [2,1]
+
+var a__ = a.filter(function(x){ return x%2 == 0 ;}) // [4,2]
+
+// Array.every()和 Aray.some() 函数
+
+var a = [1,2,3,4,5,6];
+
+var aa = a.every(function(x){ return x < 10; }); // => true, 所有值都小于10,都返回true
+
+var aa_ = a.every(function(x){ return x % 2 === 0; }); // => false, 不是所有都为true
+
+
+var b = a.some(function(x){ return x%2 === 0; }); // => true, 只要一个为true就但会true
+
+var bb = a.some(isNaN)  // => false,都为false就返回false。
 ```
 
 **数组和对象混合使用**
@@ -189,7 +305,12 @@ function fun_for(n){
     return result;
 };
 
+
+```
+
 *switch*
+
+```javascript
 
 switch(n){
     case 1:                            // 如果 n === 1, 从这里执行
@@ -314,3 +435,11 @@ finally{
 }
 
 ```
+
+**序列化对象**
+
+---
+
+    对象序列化：将对象的状态转换为字符串，也可将字符串还原为对象。
+
+    JSON.stringify() 和 JSON.parse()分别用来序列化和还原JavaScript对象。
