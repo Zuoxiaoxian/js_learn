@@ -197,6 +197,18 @@ var aa_ = a.every(function(x){ return x % 2 === 0; }); // => false, 不是所有
 var b = a.some(function(x){ return x%2 === 0; }); // => true, 只要一个为true就但会true
 
 var bb = a.some(isNaN)  // => false,都为false就返回false。
+
+// reduce() Array.reduce()
+
+var a = [1,2,3,4,5];
+
+var sum = a.reduce(function(x, y){ return x + y}, 0);    // 数组求和， 第一个参数函数，第一个参数（可选）传递给函数的初始值
+
+var product = a.reduce(function(x, y){ return x  *  y}, 1); // 数组求积
+
+var max = a.reduce(function(x, y){ return (x > y)? x: y;}); // 求数组最值
+
+
 ```
 
 **数组和对象混合使用**
@@ -443,3 +455,170 @@ finally{
     对象序列化：将对象的状态转换为字符串，也可将字符串还原为对象。
 
     JSON.stringify() 和 JSON.parse()分别用来序列化和还原JavaScript对象。
+
+
+## 正则表达式 RegExp
+
+---
+
+    在js中使用 /正则表达式/修饰匹配模式  如： /^HTML/ -->匹配以HTML开始的字符串， /[1-9][0-9]*/ -->匹配一个非零数，后是任意个数字
+
+    /javascript/i -->匹配单词javascript, 忽略大小写
+
+    "i": /i 说明模式匹配是不区分大小写。执行不区分大小写匹配
+    "g": /g 说明模式匹配应该是全局的。执行一个全局匹配，简而言之，即找到所有的匹配，而不是在找到第一个之后就停止。
+    "m": /m 说明模式匹配可以多行。
+
+
+*正则表达式的字符类*
+
+---
+
+    [...]        方括号内的任意字符
+    [^...]       不在方括号内的任意字符
+    .            除换行和其他Unicode行终止符之外的任意字符
+    \w           任何ASCII字符组成的单词，等价[a-zA-Z0-9]
+    \W           任何不是ASCII字符组成的单词，等价[^a-zA-Z0-9]
+    \d           任何ASCII字符，等价[0-9]
+    \D                         等价[^0-9]
+
+
+*正则表达式的重复语法*
+
+---
+
+    {n, m}      匹配前一项至少n次，但不超过m次
+    {n,}        匹配前一项n次或者更多次
+    {n}         匹配前一项n次
+    ?           匹配前一项0次或者1次，等价于{0, 1}
+    +           匹配前一项1次或多次，等价于{1,}
+    *           匹配前一项0次或多次，等价于{0,}
+
+
+**非贪婪匹配**
+
+---
+
+    以上均为贪婪匹配（尽可能多的匹配），若要改为非贪婪匹配，只需在待匹配的字符后面跟随一个问号即可："??", "+?", "*?", "{1, 5}?"
+
+    非贪婪匹配： 尽可能少的匹配
+
+
+**选择、分组、引用**
+
+---
+
+    |     选择：/ab|cd|ef/    匹配ab或cd或ef
+
+
+**用于模式匹配的String方法**
+
+***search()***
+
+---
+
+    string.search(): 参数是一个正则表达式，返回第一个与之匹配的子串的起始位置，如果找不到匹配的子串，它将返回-1.
+
+```javascript
+"JavaScript".search(/script/i) // => 4
+```
+
+***replace()***
+
+---
+
+    string.replace():参数一，正则表达式。参数二，要进行替换的字符串。
+    如果正则表达式中设置了"g"，那么替换所有匹配到的，否则只替换所有匹配到的第一个。
+
+```javascript
+// 将所有不区分大小写的javascript都替换成大小正确的JavaScript
+text.replace(/javascript/gi, "JavaScript");
+```
+
+
+***match()***
+
+---
+
+    string.match(): 参数是一个正则表达式，返回一个由匹配结果组成的数组，如果正则表达式设置了修饰符"g"，则该方法返回的数组包含字符串中所有匹配的结果。
+
+```javascript
+var text = "1 plus 2 equals 3"
+text.match(/\d+/g)             // => ["1", "2", "3"]
+
+```
+
+**Web浏览器中的javascript**
+
+```javascript
+
+// 设置location属性，从而跳转到新的web页面。
+window.location = "http://www.baidu.com";
+
+// 等待两秒，然后说hello
+setTimeout(function(){ alert("hello world");}, 2000);
+
+// 查找 id = "XXXX" 的元素
+var getelementbyid = document.getElementById("XXX");
+
+// 每个 Element对象都有 style 和 className属性，允许脚本指定文档元素的CSS样式，或修改应用到元素上的CSS类名。
+
+// 改变样式属性  
+getelementbyid.style.backgroundColor = 'yellow';
+
+// 改变类
+getelementbyid.className = "XSXSX";
+
+// 当用户点击getelementbyid 元素时， 更新它的内容。
+getelementbyid.onclick = function(){
+    this.innerHTML = new Date().toString();
+}
+
+
+```
+
+***URL 中的 JavaScript***
+
+---
+    在URL后跟一个javascript:协议限定符，是另一种嵌入JavaScript代码到客户端的方式。这种特殊的协议类型指定URL内容为任意字符串，这个字符串是会被JavaScript解释器运行的JavaScript代码。它被当做单独的一行代码对待。
+
+    javascript: URL 能识别的 “资源” 是转换成字符串的执行代码的返回值。如果代码返回undefind，那么这个资源是没有内容的。
+
+```javascript
+
+// 点击得到时间
+<a href="javascript: new Date().toLocaleTimeString();">
+    现在是什么时间？
+</a>
+
+
+// 打开一个窗口
+<a href="javascript:void window.poen('http://www.baidu.com')">打开一个窗口</a>
+
+```
+
+***计时器***
+
+---
+
+    setTimeout(): 实现一个函数在指定的毫秒数之后运行。
+
+    setTimeout(): 返回一个值，这个值可以传递给clearTimeout()用于取消这个函数的执行。
+
+    setInterval():在指定毫秒数的间隔里重复调用。
+
+    setInterval(updateClock, 6000);  // 每隔6s调用一次updateClock().
+
+    setInterval(): 返回一个值，这个值传递给clearInterval(), 用于取消后续函数的调用。
+
+
+
+**浏览历史**
+
+---
+
+    history对象的back() 和 forward() 方法与浏览器的 "后退" 和 "前进" 按钮一样。
+
+
+    history.go(num);  //  num: num 为正，向前， num 为负，向后
+

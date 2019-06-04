@@ -99,3 +99,16 @@ function fac(x){
 
 
 
+// 提取URL的搜索字符串中的参数
+
+function urlArgs(){
+    var args = {};
+
+    var query = location.search.substring(1);   // 查找到查询串，并去掉‘？’
+
+    console.log(query)
+}
+
+
+
+
